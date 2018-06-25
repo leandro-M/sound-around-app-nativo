@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/background_login"
+    tools:context=".Profile" android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        app:srcCompat="@mipmap/logotipo"
+        android:contentDescription="TODO" />
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/user" />
+
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="280dp"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="Nome completo"
+                android:inputType="textPersonName"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="30dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/email" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="280dp"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textPersonName"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/imageView22"
+                android:layout_width="24dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/lock" />
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="280dp"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Atualizar dados"
+            android:backgroundTint="@color/colorDarkTransparent"
+            android:textColor="@color/colorWhite"/>
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sair do aplicativo"
+            android:backgroundTint="@color/colorRed"
+            android:textColor="@color/colorWhite"
+            android:layout_marginBottom="30dp"/>
+    </LinearLayout>
+</ScrollView>

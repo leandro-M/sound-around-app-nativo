@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Sound Around</string>
+    <string name="title_activity_album">Album</string>
+    <string name="tab_text_1">Album</string>
+    <string name="tab_text_2">Perfil</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_lvlist_album">LVListAlbum</string>
+    <string name="textview">É apenas um teste</string>
+    <string name="asasasas">asasasas</string>
+    <string name="apenas_um_teste">É apenas um teste</string>
+</resources>
