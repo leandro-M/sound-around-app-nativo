@@ -57,7 +57,7 @@
 
         <EditText
             android:id="@+id/edtLogin"
-            android:layout_width="280dp"
+            android:layout_width="265dp"
             android:layout_height="47dp"
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
@@ -90,7 +90,7 @@
 
         <EditText
             android:id="@+id/edtPassword"
-            android:layout_width="280dp"
+            android:layout_width="265dp"
             android:layout_height="47dp"
             android:backgroundTint="@android:color/transparent"
             android:ems="10"

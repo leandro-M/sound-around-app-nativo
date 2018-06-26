@@ -135,12 +135,6 @@ public class Register extends AppCompatActivity {
                         String created_at = jObj.getString("created");
                         String token = jObj.getString("_accessToken");
 
-                        Log.d("NOME", name);
-                        Log.d("EMAIL", email);
-                        Log.d("CREATED AT", created_at);
-                        Log.d("TOKEN", token);
-
-
                         // Inserting row in users table
                         db.addUser(name, email, id, created_at, token);
 

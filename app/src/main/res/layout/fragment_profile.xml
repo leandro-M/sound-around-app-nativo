@@ -40,7 +40,7 @@
 
             <EditText
                 android:id="@+id/edtName"
-                android:layout_width="280dp"
+                android:layout_width="265dp"
                 android:layout_height="47dp"
                 android:backgroundTint="@android:color/transparent"
                 android:ems="10"
@@ -72,7 +72,7 @@
 
             <EditText
                 android:id="@+id/edtEmail"
-                android:layout_width="280dp"
+                android:layout_width="265dp"
                 android:layout_height="47dp"
                 android:backgroundTint="@android:color/transparent"
                 android:ems="10"
@@ -103,7 +103,7 @@
 
             <EditText
                 android:id="@+id/edtPassword"
-                android:layout_width="280dp"
+                android:layout_width="265dp"
                 android:layout_height="47dp"
                 android:backgroundTint="@android:color/transparent"
                 android:ems="10"
@@ -114,14 +114,192 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
             android:layout_gravity="center"
-            android:text="Atualizar dados"
-            android:backgroundTint="@color/colorDarkTransparent"
-            android:textColor="@color/colorWhite"/>
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/imageView23"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/calendar" />
+
+            <EditText
+                android:id="@+id/edtBirthdate"
+                android:layout_width="265dp"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="Data de aniversário"
+                android:inputType="date"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorWhite"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/edtPostalCode"
+                android:layout_width="240dp"
+                android:layout_height="47dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="CEP"
+                android:inputType="number"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/btnSearchCep"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="9dp"
+                    android:background="@drawable/search"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:text="Buscar" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/edtStreet"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="Endereço"
+                android:inputType="textPersonName"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/edtNeighborhood"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="Bairro"
+                android:inputType="textPersonName"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center"
+            android:background="@color/colorWhiteTransparent"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/edtCity"
+                android:layout_width="240dp"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="Cidade"
+                android:layout_marginRight="10dp"
+                android:inputType="textPersonName"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+            <EditText
+                android:id="@+id/edtState"
+                android:layout_width="50dp"
+                android:layout_height="47dp"
+                android:backgroundTint="@android:color/transparent"
+                android:ems="10"
+                android:hint="UF"
+                android:inputType="textPersonName"
+                android:textColor="#fff"
+                android:textColorHint="#50ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:text="Cancelar"
+                android:backgroundTint="@color/colorRed"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btnSaveRegister"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/holo_green_light"
+                android:text="Salvar"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnLogout"
@@ -129,7 +307,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Sair do aplicativo"
-            android:backgroundTint="@color/colorRed"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:textColor="@color/colorWhite"
             android:layout_marginBottom="30dp"/>
     </LinearLayout>

@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.leandro.soundaroundapp.controllers.LoginController;
 import com.example.leandro.soundaroundapp.helper.SQLiteHandler;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,10 +93,15 @@ public class ListAlbums extends Fragment {
 
                         JSONObject album = item.getJSONObject("Album");
                         String name = album.getString("name");
+                        String description = album.getString("description");
+                        String cover = album.getString("cover");
 
-                        IMAGES.add("");
+                        if(cover.isEmpty()) {
+                            cover = "http://redesinodal.com.br/portalrede/wp-content/themes/linstar/assets/images/default.jpg";
+                        }
+                        IMAGES.add(cover);
                         NAMES.add(name);
-                        DESCRIPTIONS.add(name);
+                        DESCRIPTIONS.add(description);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -142,6 +148,8 @@ public class ListAlbums extends Fragment {
             imageView = view.findViewById(R.id.albumCover);
             name_album = view.findViewById(R.id.albumName);
             description_album = view.findViewById(R.id.albumDescription);
+
+            Picasso.get().load(IMAGES.get(i)).into(imageView);
 
             name_album.setText(NAMES.get(i));
             description_album.setText(DESCRIPTIONS.get(i));

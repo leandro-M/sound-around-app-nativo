@@ -4,17 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/albumCover"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginRight="10dp"
         android:contentDescription="@string/asasasas"
         app:srcCompat="@mipmap/logotipo" />
 
     <LinearLayout
-        android:layout_width="240dp"
+        android:layout_width="230dp"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -23,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="@string/apenas_um_teste"
             android:textColor="#fff"
             android:textSize="14sp" />
@@ -40,9 +42,10 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="32dp"
-        android:layout_height="75dp"
-        android:background="@color/colorPrimary"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/trash"
         android:backgroundTint="@color/colorRed" />
 
 </LinearLayout>
