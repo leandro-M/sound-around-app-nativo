@@ -46,8 +46,7 @@ public class ListAlbums extends Fragment {
     private SessionManager session;
 
     public ImageView imageView;
-    public TextView name_album;
-    public TextView description_album;
+    public TextView name_album, description_album;
 
     private ProgressDialog pDialog;
     private SQLiteHandler db;
@@ -252,8 +251,6 @@ public class ListAlbums extends Fragment {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-                            Toast.makeText(getContext(), "não vai excluir!", Toast.LENGTH_SHORT).show();
                             // Do nothing
                             dialog.dismiss();
                         }

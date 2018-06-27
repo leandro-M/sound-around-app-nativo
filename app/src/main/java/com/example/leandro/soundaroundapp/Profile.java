@@ -32,7 +32,7 @@ import java.util.Map;
 
 
 public class Profile extends Fragment {
-    EditText edName, edEmail, edPassword, edBirthdate, edCEP, edStreet, edNeighborhood, edUf, edCity, edAddressId;
+    EditText edName, edEmail, edPassword, edBirthdate, edCEP, edStreet, edNeighborhood, edUf, edCity, edAddressId, edBio;
     Button btnLogout, btnGetCEP, btnSave, btnCancel;
     View view;
 
@@ -73,6 +73,7 @@ public class Profile extends Fragment {
         edEmail = view.findViewById(R.id.edtEmail);
         edPassword = view.findViewById(R.id.edtPassword);
         edBirthdate = view.findViewById(R.id.edtBirthdate);
+        edBio = view.findViewById(R.id.edtBio);
 
         edBirthdate.addTextChangedListener(MaskEditUtil.mask(edBirthdate, MaskEditUtil.FORMAT_DATE));
         // <------------
@@ -106,6 +107,60 @@ public class Profile extends Fragment {
        btnSave.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               if(edName.toString().trim().isEmpty()) {
+                   edName.setError("Campo obrigatório");
+
+                   return;
+               }
+
+               if(edEmail.toString().trim().isEmpty()) {
+                   edEmail.setError("Campo obrigatório");
+
+                   return;
+               }
+
+               if(edBirthdate.toString().trim().isEmpty()) {
+                   edBirthdate.setError("Campo obrigatório");
+
+                   return;
+               }
+
+               if(edCEP.toString().trim().isEmpty()) {
+                   edCEP.setError("Campo obrigatório");
+
+                   return;
+               }
+
+               if(edCEP.toString().trim().isEmpty()) {
+                   edCEP.setError("Campo obrigatório");
+
+                   return;
+               }
+
+               if(edCity.toString().trim().isEmpty()) {
+                   edCity.setError("Campo obrigatório");
+
+                   return;
+               }
+               if(edNeighborhood.toString().trim().isEmpty()) {
+                   edNeighborhood.setError("Campo obrigatório");
+
+                   return;
+               }
+
+               if(edStreet.toString().trim().isEmpty()) {
+                   edStreet.setError("Campo obrigatório");
+
+                   return;
+               }
+
+               if(edUf.toString().trim().isEmpty()) {
+                   edUf.setError("Campo obrigatório");
+
+                   return;
+               }
+
+
                registerUser();
            }
        });
@@ -220,23 +275,22 @@ public class Profile extends Fragment {
                 String token_id = user.get("token_id");
 
                 params.put("data[Token][id]", token_id);
-                params.put("data[Address][id]", String.valueOf(edAddressId.getText()));
+
                 params.put("data[User][id]", uid);
                 params.put("data[User][name]", String.valueOf(edName.getText()));
                 params.put("data[User][email]", String.valueOf(edEmail.getText()));
+                params.put("data[User][password]", String.valueOf(edPassword.getText()));
+                params.put("data[User][birthdate]", String.valueOf(edBirthdate.getText()));
+                params.put("data[User][bio]", String.valueOf(edBio.getText()));
+                params.put("data[User][update]", String.valueOf(true));
 
-                /*if(!edPassword.getText().equals("") || !edPassword.getText().toString().isEmpty()) {
-                    params.put("data[User][password]", String.valueOf(edPassword.getText()));
-                }
-
-                if(!edBirthdate.getText().equals("") || !edBirthdate.getText().toString().isEmpty()) {
-                    params.put("data[User][birthdate]", String.valueOf(edBirthdate.getText()));
-                }*/
+                params.put("data[Address][id]", String.valueOf(edAddressId.getText()));
+                params.put("data[Address][postal_code]", String.valueOf(edCEP.getText()));
                 params.put("data[Address][street]", String.valueOf(edStreet.getText()));
                 params.put("data[Address][city]", String.valueOf(edCity.getText()));
                 params.put("data[Address][neighborhood]", String.valueOf(edNeighborhood.getText()));
                 params.put("data[Address][state]", String.valueOf(edUf.getText()));
-                params.put("data[User][update]", String.valueOf(true));
+
 
                 return params;
             }
@@ -256,7 +310,7 @@ public class Profile extends Fragment {
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
 
-        final String token = user.get("token");
+        final String token = user.get("uid");
 
         StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.URL_GETUSERINFO + token, new Response.Listener<String>() {
 
@@ -272,8 +326,10 @@ public class Profile extends Fragment {
                     edName.setText(jObject.getString("name"));
                     edEmail.setText(jObject.getString("email"));
                     edBirthdate.setText(jObject.getString("birthdate"));
+                    edBio.setText(jObject.getString("bio"));
 
                     edCity.setText(jObject.getJSONObject("Address").getString("city"));
+                    edCEP.setText(jObject.getJSONObject("Address").getString("postal_code"));
                     edNeighborhood.setText(jObject.getJSONObject("Address").getString("neighborhood"));
                     edStreet.setText(jObject.getJSONObject("Address").getString("street"));
                     edUf.setText(jObject.getJSONObject("Address").getString("state"));

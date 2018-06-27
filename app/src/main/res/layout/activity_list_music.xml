@@ -5,9 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background_login"
-    tools:context=".ListMusic">
+    tools:context=".ListMusic"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtIdAlbum"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#222"
+        android:textSize="20dp"
+        android:text="Sound Around"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/btnNovaMusica"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="-55dp"
+        android:layout_marginLeft="310dp"
+        android:background="@android:drawable/ic_menu_add" />
+
 
     <ListView
+        android:id="@+id/list_music"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

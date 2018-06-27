@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ import java.util.zip.Inflater;
 
 public class Album extends AppCompatActivity {
 
+    public Button btnAddNewAlbum;
     private ViewPager mViewPager;
 
     private SectionsPageAdapter mSectionsPageAdapter;
@@ -43,6 +45,15 @@ public class Album extends AppCompatActivity {
         mViewPager = (ViewPager)findViewById(R.id.container);
         setupViewPager(mViewPager);
 
+        btnAddNewAlbum = (Button)findViewById(R.id.btnNewAlbum);
+
+        btnAddNewAlbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Album.this, AlbumNovo.class);
+                startActivity(intent);
+            }
+        });
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }

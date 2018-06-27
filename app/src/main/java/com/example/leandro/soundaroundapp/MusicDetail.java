@@ -25,9 +25,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlbumDetail extends AppCompatActivity {
-    Button btViewAllMusic, btCancel, btSaveAlbumDetail;
-    EditText edNameAlbum, edDescriptionAlbum, edAlbumId;
+public class MusicDetail extends AppCompatActivity {
+
+    Button btCancel, btSaveNovaMusica;
+    EditText edNameMusica, edMusicId, edViews;
     public View view;
 
     public String album_id;
@@ -40,46 +41,37 @@ public class AlbumDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_album_detail);
+        setContentView(R.layout.activity_music_detail);
 
-        db = new SQLiteHandler(AlbumDetail.this);
+        db = new SQLiteHandler(MusicDetail.this);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        btViewAllMusic = (Button)findViewById(R.id.btnViewAllMusic);
-        btCancel = (Button)findViewById(R.id.btnCancel);
-        btSaveAlbumDetail = (Button)findViewById(R.id.btnSaveAlbumDetail);
-        edNameAlbum = (EditText)findViewById(R.id.edtAlbumName);
-        edDescriptionAlbum = (EditText)findViewById(R.id.edtAlbumDescription);
-        edAlbumId = (EditText)findViewById(R.id.edtAlbumId);
+        btCancel = (Button)findViewById(R.id.btnCancelNovaMusica);
+        btSaveNovaMusica = (Button)findViewById(R.id.btnSaveNovaMusica);
+        edNameMusica = (EditText)findViewById(R.id.edtNomeMusica);
+        edMusicId = (EditText)findViewById(R.id.edtMusicDetailId);
+        edViews = (EditText)findViewById(R.id.edtViewAlbums);
 
         Intent myIntent = getIntent(); // gets the previously created intent
-        album_id = myIntent.getStringExtra("album_id");
+        String music_id = myIntent.getStringExtra("music_id");
 
 
-        edAlbumId.setText(album_id);
+        edMusicId.setText(music_id);
 
         chargeElements();
-        getAlbumDetail();
+
+        getMusicDetail();
     }
 
     private void chargeElements() {
 
-        btViewAllMusic.setOnClickListener(new View.OnClickListener() {
+        btSaveNovaMusica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AlbumDetail.this, ListMusic.class);
-                intent.putExtra("album_id", edAlbumId.getText().toString());
-                startActivity(intent);
-            }
-        });
-
-        btSaveAlbumDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveAlbumDetail(edAlbumId.getText());
+                saveMusicDetail(edMusicId.getText());
             }
         });
 
@@ -91,25 +83,32 @@ public class AlbumDetail extends AppCompatActivity {
         });
     }
 
-    private void getAlbumDetail() {
+    private void getMusicDetail() {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
         pDialog.setMessage("Buscando informações ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.URL_ALBUMS_VIEW + edAlbumId.getText(), new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.URL_MUSIC_VIEW + edMusicId.getText(), new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 hideDialog();
 
                 System.out.println("URL PARA O DETALHE DO ALBUM");
-                System.out.println(AppConfig.URL_ALBUMS_VIEW + edAlbumId.getText());
+                System.out.println(AppConfig.URL_ALBUMS_VIEW + edMusicId.getText());
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    edNameAlbum.setText(jObj.getJSONObject("Album").getString("name"));
-                    edDescriptionAlbum.setText(jObj.getJSONObject("Album").getString("description"));
+                    edNameMusica.setText(jObj.getJSONObject("Sound").getString("name"));
+
+                    String views = jObj.getJSONObject("Sound").getString("views");
+
+                    if(views.equals("null")) {
+                        views = "0";
+                    }
+
+                    edViews.setText(views);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -128,14 +127,14 @@ public class AlbumDetail extends AppCompatActivity {
         LoginController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    public void saveAlbumDetail(final Editable id) {
+    public void saveMusicDetail(final Editable id) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
         pDialog.setMessage("Atualizando dados ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_ALBUMS_SAVE, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_MUSIC_SAVE, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -150,19 +149,19 @@ public class AlbumDetail extends AppCompatActivity {
                     boolean error = jObj.getBoolean("error");
 
                     if (!error) {
-                        Toast.makeText(AlbumDetail.this,"Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MusicDetail.this,"Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(AlbumDetail.this, Login.class);
+                        Intent intent = new Intent(MusicDetail.this, Login.class);
                         startActivity(intent);
                         finish();
 
                     } else {
-                        Toast.makeText(AlbumDetail.this, "Erro ao atualizar o album.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MusicDetail.this, "Erro ao atualizar a música.", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(AlbumDetail.this, "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MusicDetail.this, "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -171,7 +170,7 @@ public class AlbumDetail extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Erro ao atualizar: " + error.getMessage());
-                Toast.makeText(AlbumDetail.this,
+                Toast.makeText(MusicDetail.this,
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
             }
@@ -182,15 +181,8 @@ public class AlbumDetail extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
 
-                // Fetching user details from sqlite
-                HashMap<String, String> user = db.getUserDetails();
-
-                String uid = user.get("uid");
-
-                params.put("data[Album][id]", String.valueOf(id));
-                params.put("data[Album][name]", String.valueOf(edNameAlbum.getText()));
-                params.put("data[Album][description]", String.valueOf(edDescriptionAlbum.getText()));
-                params.put("data[Album][user_id]", uid);
+                params.put("data[Sound][id]", String.valueOf(id));
+                params.put("data[Sound][name]", String.valueOf(edNameMusica.getText()));
 
                 return params;
             }

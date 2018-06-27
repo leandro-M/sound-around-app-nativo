@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background_login"
-    tools:context=".AlbumDetail"
+    tools:context=".MusicNova"
     android:orientation="vertical">
 
 
@@ -19,53 +19,32 @@
     <LinearLayout
         android:layout_width="315dp"
         android:layout_height="56dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorWhiteTransparent"
         android:orientation="horizontal"
         android:padding="5dp">
 
+
         <EditText
-            android:id="@+id/edtAlbumName"
-            android:layout_width="300dp"
-            android:layout_height="47dp"
+            android:id="@+id/edtAlbumIdNovaMusica"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
             android:hint="Nome do album"
             android:inputType="textPersonName"
             android:textColor="#fff"
             android:textColorHint="#50ffffff" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="315dp"
-        android:layout_height="170dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorWhiteTransparent"
-        android:orientation="horizontal"
-        android:padding="5dp">
 
         <EditText
-            android:id="@+id/edtAlbumDescription"
+            android:id="@+id/edtNomeMusicaNova"
             android:layout_width="300dp"
-            android:layout_height="match_parent"
+            android:layout_height="47dp"
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
-            android:hint="Descrição do album"
-            android:inputType="textPersonName"
-            android:textColor="#fff"
-            android:gravity="start"
-            android:textColorHint="#50ffffff" />
-
-        <EditText
-            android:id="@+id/edtAlbumId"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:backgroundTint="@android:color/transparent"
-            android:ems="10"
-            android:hint="Descrição do album"
+            android:hint="Nome do album"
             android:inputType="textPersonName"
             android:textColor="#fff"
             android:textColorHint="#50ffffff" />
@@ -79,7 +58,7 @@
         android:padding="5dp">
 
         <Button
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnCancelNovaMusicaNova"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -89,7 +68,7 @@
             android:textColor="@color/colorWhite" />
 
         <Button
-            android:id="@+id/btnSaveAlbumDetail"
+            android:id="@+id/btnSaveNovaMusicaNova"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -98,14 +77,4 @@
             android:textColor="@color/colorWhite" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnViewAllMusic"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Visualizar músicas"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="@color/colorWhite"
-        android:layout_marginBottom="30dp"/>
 </LinearLayout>

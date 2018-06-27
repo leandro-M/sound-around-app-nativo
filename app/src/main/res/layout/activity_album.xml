@@ -23,12 +23,12 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name">
+            app:title="SOUND AROUND">
 
         </android.support.v7.widget.Toolbar>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnNewAlbum"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="310dp"
