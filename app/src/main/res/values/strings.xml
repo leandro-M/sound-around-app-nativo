@@ -12,4 +12,6 @@
     <string name="textview">É apenas um teste</string>
     <string name="asasasas">asasasas</string>
     <string name="apenas_um_teste">É apenas um teste</string>
+    <string name="title_activity_album_detail">AlbumDetail</string>
+    <string name="title_activity_custom_list_music">CustomListMusic</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.leandro.soundaroundapp;
 
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 
 public class Profile extends Fragment {
-    EditText edName, edEmail, edPassword, edBirthdate, edCEP, edStreet, edNeighborhood, edUf, edCity;
+    EditText edName, edEmail, edPassword, edBirthdate, edCEP, edStreet, edNeighborhood, edUf, edCity, edAddressId;
     Button btnLogout, btnGetCEP, btnSave, btnCancel;
     View view;
 
@@ -55,6 +56,8 @@ public class Profile extends Fragment {
 
         getCityByCEP();
         saveRegister();
+        getUserInfo();
+        cancelAction();
 
         return view;
     }
@@ -75,7 +78,7 @@ public class Profile extends Fragment {
         // <------------
 
         // Forget city
-
+        edAddressId = view.findViewById(R.id.edtAddressId);
         edCEP = view.findViewById(R.id.edtPostalCode);
         edCity = view.findViewById(R.id.edtCity);
         edNeighborhood = view.findViewById(R.id.edtNeighborhood);
@@ -86,6 +89,17 @@ public class Profile extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         btnGetCEP = view.findViewById(R.id.btnSearchCep);
         btnSave = view.findViewById(R.id.btnSaveRegister);
+        btnCancel = view.findViewById(R.id.btnCancelSave);
+    }
+
+    private void cancelAction() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), Login.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void saveRegister() {
@@ -122,15 +136,10 @@ public class Profile extends Fragment {
                 try {
                     JSONObject jObject = new JSONObject(response);
 
-                    String neighborhood = jObject.getString("bairro");
-                    String uf = jObject.getString("uf");
-                    String street = jObject.getString("logradouro");
-                    String city = jObject.getString("localidade");
-
-                    edCity.setText(city);
-                    edNeighborhood.setText(neighborhood);
-                    edStreet.setText(street);
-                    edUf.setText(uf);
+                    edCity.setText(jObject.getString("localidade"));
+                    edNeighborhood.setText(jObject.getString("bairro"));
+                    edStreet.setText(jObject.getString("logradouro"));
+                    edUf.setText(jObject.getString("uf"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -165,9 +174,14 @@ public class Profile extends Fragment {
 
                 try {
                     JSONObject jObj = new JSONObject(response);
+
+                    System.out.println("TESTANDO AQUI!!! CARAI");
+                    System.out.println(response);
+
                     boolean error = jObj.getBoolean("error");
 
                     // Check for error node in json
+
                     if (!error) {
                         Toast.makeText(getContext(),"Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show();
 
@@ -177,6 +191,8 @@ public class Profile extends Fragment {
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    System.out.println("VER AQUI");
+                    System.out.println(e.toString());
                     Toast.makeText(getContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
@@ -201,22 +217,26 @@ public class Profile extends Fragment {
                 HashMap<String, String> user = db.getUserDetails();
 
                 String uid = user.get("uid");
+                String token_id = user.get("token_id");
 
+                params.put("data[Token][id]", token_id);
+                params.put("data[Address][id]", String.valueOf(edAddressId.getText()));
                 params.put("data[User][id]", uid);
                 params.put("data[User][name]", String.valueOf(edName.getText()));
                 params.put("data[User][email]", String.valueOf(edEmail.getText()));
 
-                if(!edPassword.getText().equals("") || !edPassword.getText().toString().isEmpty()) {
+                /*if(!edPassword.getText().equals("") || !edPassword.getText().toString().isEmpty()) {
                     params.put("data[User][password]", String.valueOf(edPassword.getText()));
                 }
 
                 if(!edBirthdate.getText().equals("") || !edBirthdate.getText().toString().isEmpty()) {
                     params.put("data[User][birthdate]", String.valueOf(edBirthdate.getText()));
-                }
+                }*/
                 params.put("data[Address][street]", String.valueOf(edStreet.getText()));
                 params.put("data[Address][city]", String.valueOf(edCity.getText()));
                 params.put("data[Address][neighborhood]", String.valueOf(edNeighborhood.getText()));
                 params.put("data[Address][state]", String.valueOf(edUf.getText()));
+                params.put("data[User][update]", String.valueOf(true));
 
                 return params;
             }
@@ -226,6 +246,55 @@ public class Profile extends Fragment {
         // Adding request to request queue
         LoginController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+    public void getUserInfo() {
+        // Tag used to cancel the request
+        String tag_string_req = "req_login";
+
+        pDialog.setMessage("Buscando informações ...");
+        showDialog();
+
+        // Fetching user details from sqlite
+        HashMap<String, String> user = db.getUserDetails();
+
+        final String token = user.get("token");
+
+        StringRequest strReq = new StringRequest(Request.Method.GET, AppConfig.URL_GETUSERINFO + token, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                hideDialog();
+
+                try {
+                    System.out.println("RESPONSE!");
+                    System.out.println(AppConfig.URL_GETUSERINFO + token);
+                    JSONObject jObject = new JSONObject(response);
+
+                    edName.setText(jObject.getString("name"));
+                    edEmail.setText(jObject.getString("email"));
+                    edBirthdate.setText(jObject.getString("birthdate"));
+
+                    edCity.setText(jObject.getJSONObject("Address").getString("city"));
+                    edNeighborhood.setText(jObject.getJSONObject("Address").getString("neighborhood"));
+                    edStreet.setText(jObject.getJSONObject("Address").getString("street"));
+                    edUf.setText(jObject.getJSONObject("Address").getString("state"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                hideDialog();
+            }
+        });
+
+        // Adding request to request queue
+        LoginController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
 
     private void logoutUser() {
 

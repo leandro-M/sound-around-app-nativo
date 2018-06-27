@@ -5,15 +5,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:padding="10dp">
-
-    <ImageView
-        android:id="@+id/albumCover"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginRight="10dp"
-        android:contentDescription="@string/asasasas"
-        app:srcCompat="@mipmap/logotipo" />
+    android:padding="10dp"
+    tools:context=".CustomListMusic">
 
     <EditText
         android:id="@+id/edtIdAlbum"
@@ -24,7 +17,7 @@
         android:inputType="textPersonName" />
 
     <LinearLayout
-        android:layout_width="208dp"
+        android:layout_width="289dp"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -37,14 +30,6 @@
             android:text="@string/apenas_um_teste"
             android:textColor="#fff"
             android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/albumDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/apenas_um_teste"
-            android:textColor="#fff"
-            android:textSize="11sp" />
 
     </LinearLayout>
 

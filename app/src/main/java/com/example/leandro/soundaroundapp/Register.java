@@ -134,9 +134,10 @@ public class Register extends AppCompatActivity {
                         String email = jObj.getString("email");
                         String created_at = jObj.getString("created");
                         String token = jObj.getString("_accessToken");
+                        String token_id = jObj.getString("token_id");
 
                         // Inserting row in users table
-                        db.addUser(name, email, id, created_at, token);
+                        db.addUser(name, email, id, created_at, token, token_id);
 
                         // Launch main activity
                         Intent intent = new Intent(Register.this,
@@ -176,6 +177,9 @@ public class Register extends AppCompatActivity {
                 params.put("data[User][name]", name);
                 params.put("data[User][email]", email);
                 params.put("data[User][password]", password);
+
+                System.out.println("REGISTRANDO!");
+                System.out.println(params);
 
                 return params;
             }

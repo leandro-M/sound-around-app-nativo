@@ -33,9 +33,6 @@ public class Album extends AppCompatActivity {
 
     private SectionsPageAdapter mSectionsPageAdapter;
 
-    private SQLiteHandler db;
-    private SessionManager session;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +54,5 @@ public class Album extends AppCompatActivity {
         adapter.addFragment(new Profile(), "Meu perfil");
 
         viewPager.setAdapter(adapter);;
-    }
-
-    private void logoutUser() {
-        session.setLogin(false);
-
-        db.deleteUsers();
-
-        // Launching the login activity
-        Intent intent = new Intent(Album.this, Login.class);
-        startActivity(intent);
-        finish();
     }
 }

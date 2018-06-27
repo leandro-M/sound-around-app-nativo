@@ -24,6 +24,15 @@
             android:label="@string/title_activity_album"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Register" />
+        <activity
+            android:name=".AlbumDetail"
+            android:label="@string/title_activity_album_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ListMusic" />
+        <activity
+            android:name=".CustomListMusic"
+            android:label="@string/title_activity_custom_list_music"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

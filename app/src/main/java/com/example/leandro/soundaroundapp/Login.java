@@ -150,9 +150,10 @@ public class Login extends AppCompatActivity {
                         String email = jObj.getString("email");
                         String created_at = jObj.getString("created");
                         String token = jObj.getString("_accessToken");
+                        String token_id = jObj.getString("token_id");
 
                         // Inserting row in users table
-                        db.addUser(name, email, id, created_at, token);
+                        db.addUser(name, email, id, created_at, token, token_id);
 
                         // Launch main activity
                         Intent intent = new Intent(Login.this,
